@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import signIn from "../../pages/api/auth/signin";
 import signUp from "../../pages/api/auth/signup";
 import { useRouter } from "next/navigation";
@@ -11,6 +11,8 @@ import {
 } from "firebase/auth";
 import { auth } from "../Providers";
 import PhoneInput from "react-phone-number-input/input";
+import { getToken, Messaging } from "firebase/messaging";
+import { messagingFB } from "app/config";
 
 interface IForm {
   option: number;
@@ -28,6 +30,18 @@ function Page() {
   );
 
   const router = useRouter();
+
+  useEffect(() => {
+    getTokenFCM();
+  }, []);
+
+  const getTokenFCM = async () => {
+    const fcm_token = await getToken(messagingFB, {
+      vapidKey: "your_web_push_certificate_key_pair",
+    });
+    console.log(fcm_token, "fcm_token");
+    return fcm_token;
+  };
 
   const onSigin = async () => {
     try {

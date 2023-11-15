@@ -12,7 +12,8 @@ import {
 import { auth } from "../Providers";
 import PhoneInput from "react-phone-number-input/input";
 import { getToken, Messaging } from "firebase/messaging";
-import { messagingFB } from "app/config";
+import firebase_app  from "app/config";
+import { getMessaging } from "firebase/messaging";
 
 interface IForm {
   option: number;
@@ -37,6 +38,7 @@ function Page() {
   }, []);
 
   const getTokenFCM = async () => {
+    const messagingFB = getMessaging(firebase_app);
     const fcm_token = await getToken(messagingFB, {
       vapidKey: "your_web_push_certificate_key_pair",
     });

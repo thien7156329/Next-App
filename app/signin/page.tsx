@@ -32,6 +32,7 @@ function Page() {
   const router = useRouter();
 
   useEffect(() => {
+    console.log("ccc");
     getTokenFCM();
   }, []);
 

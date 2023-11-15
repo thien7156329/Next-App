@@ -35,7 +35,7 @@ yarn-error.log*
 *.tsbuildinfo
 
 # service worker
-# public/firebase-messaging-sw.js
+public/firebase-messaging-sw.js
 
 # local
 deploydev.sh

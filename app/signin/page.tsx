@@ -11,9 +11,6 @@ import {
 } from "firebase/auth";
 import { auth } from "../Providers";
 import PhoneInput from "react-phone-number-input/input";
-import { getToken, Messaging } from "firebase/messaging";
-import firebase_app from "app/config";
-import { getMessaging } from "firebase/messaging";
 
 interface IForm {
   option: number;
@@ -112,7 +109,6 @@ function Page() {
         router.push("/");
       })
       .catch((err) => {
-        console.log(err, "ccc");
         alert("Incorrect code");
       });
   };
@@ -139,20 +135,6 @@ function Page() {
         break;
     }
   };
-
-  const getTokenFCM = async () => {
-    const messagingFB = getMessaging(firebase_app);
-    const fcm_token = await getToken(messagingFB, {
-      vapidKey: "g3KgUs6cQB6Prpz7YG7AGXXAHwb-qfoD6erJ1n90Ad8",
-    });
-    console.log(fcm_token, "fcm_token");
-    return fcm_token;
-  };
-
-  useEffect(() => {
-    console.log("ccc");
-    getTokenFCM();
-  }, []);
 
   return (
     <div className="container-signin">

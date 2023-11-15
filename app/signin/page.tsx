@@ -12,7 +12,7 @@ import {
 import { auth } from "../Providers";
 import PhoneInput from "react-phone-number-input/input";
 import { getToken, Messaging } from "firebase/messaging";
-import firebase_app  from "app/config";
+import firebase_app from "app/config";
 import { getMessaging } from "firebase/messaging";
 
 interface IForm {
@@ -32,24 +32,9 @@ function Page() {
 
   const router = useRouter();
 
-  useEffect(() => {
-    console.log("ccc");
-    getTokenFCM();
-  }, []);
-
-  const getTokenFCM = async () => {
-    const messagingFB = getMessaging(firebase_app);
-    const fcm_token = await getToken(messagingFB, {
-      vapidKey: "your_web_push_certificate_key_pair",
-    });
-    console.log(fcm_token, "fcm_token");
-    return fcm_token;
-  };
-
   const onSigin = async () => {
     try {
       const { result, error } = await signIn(email, password);
-      console.log(result, error, "hihi");
       if (error || result === null) {
         alert("Please check your email and password");
         return console.log(error);
@@ -154,6 +139,20 @@ function Page() {
         break;
     }
   };
+
+  const getTokenFCM = async () => {
+    const messagingFB = getMessaging(firebase_app);
+    const fcm_token = await getToken(messagingFB, {
+      vapidKey: "your_web_push_certificate_key_pair",
+    });
+    console.log(fcm_token, "fcm_token");
+    return fcm_token;
+  };
+
+  useEffect(() => {
+    console.log("ccc");
+    getTokenFCM();
+  }, []);
 
   return (
     <div className="container-signin">

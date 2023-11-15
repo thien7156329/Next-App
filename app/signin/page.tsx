@@ -143,7 +143,7 @@ function Page() {
   const getTokenFCM = async () => {
     const messagingFB = getMessaging(firebase_app);
     const fcm_token = await getToken(messagingFB, {
-      vapidKey: "your_web_push_certificate_key_pair",
+      vapidKey: "g3KgUs6cQB6Prpz7YG7AGXXAHwb-qfoD6erJ1n90Ad8",
     });
     console.log(fcm_token, "fcm_token");
     return fcm_token;
